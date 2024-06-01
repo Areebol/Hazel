@@ -1,11 +1,10 @@
 #pragma once
+#ifdef HZ_PLATFORM_WINDOWS
 
-#ifdef HZ_PLATERFORM_WINDOWS
 extern Hazel::Application* Hazel::CreateApplication();
-
 int main(int argc, char** argv)
 {
-	printf("Hazel Engine");
+	Hazel::Log::Init();
 	auto app = Hazel::CreateApplication();
 	app->Run();
 	delete app;

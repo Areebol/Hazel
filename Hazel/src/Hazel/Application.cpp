@@ -1,12 +1,20 @@
 #include "Application.h"
-namespace Hazel {
-		Application::Application(){
-		}
-		Application::~Application(){
+#include "Events/ApplicationEvent.h"
+#include "Events/KeyEvent.h"
+#include "Events/MouseEvent.h"
+#include "Log.h"
 
-		}
-		void Application::Run()
-		{
-			while (true);
-		}
+namespace Hazel {
+	Application::Application() {
+	}
+	Application::~Application() {
+
+	}
+	void Application::Run()
+	{
+		MouseScrolledEvent e(1,2);
+		HZ_ERROR(e.ToString());
+
+		while (true);
+	}
 }
