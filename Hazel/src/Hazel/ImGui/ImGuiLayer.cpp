@@ -59,8 +59,6 @@ namespace Hazel{
 
 	void ImGuiLayer::OnUpdate()
 	{
-		HZ_INFO("ImGuiLayer::Update");
-
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
 		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
@@ -132,6 +130,7 @@ namespace Hazel{
 		io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
 		return false;
 	}
+
 	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
@@ -139,6 +138,7 @@ namespace Hazel{
 
 		return false;
 	}
+
 	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
@@ -148,6 +148,7 @@ namespace Hazel{
 
 		return false;
 	}
+
 	bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
