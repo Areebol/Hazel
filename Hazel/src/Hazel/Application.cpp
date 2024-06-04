@@ -1,6 +1,6 @@
 #include "hzpch.h"
-#include "Application.h"
 
+#include "Application.h"
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Hazel/Log.h"
 #include "Hazel/Input.h"
@@ -39,8 +39,6 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
-			auto [x, y] = Input::GetMousePosition();
-			HZ_TRACE("{0},{1}", x, y);
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_LayerStack)

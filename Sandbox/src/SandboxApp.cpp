@@ -1,5 +1,6 @@
 #include "hzpch.h"
 #include <Hazel.h>
+
 class ExampleLayer : public Hazel::Layer
 {
 public:
@@ -10,12 +11,14 @@ public:
 
 	void OnUpdate() override
 	{
-		HZ_INFO("ExampleLayer::Update");
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_TAB))
+			HZ_WARN("KEY_TAB(Pool)");
 	}
 
 	void OnEvent(Hazel::Event& event) override
 	{
-		HZ_TRACE("{0}", event.ToString());
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_TAB))
+			HZ_WARN("KEY_TAB(Event)");
 	}
 };
 
@@ -23,7 +26,7 @@ class SandBox : public Hazel::Application
 {
 public:
 	SandBox() {
-		//PushLayer(new ExampleLayer());
+		PushLayer(new ExampleLayer());
 		PushOverlay(new Hazel::ImGuiLayer());
 	}
 	~SandBox() {
