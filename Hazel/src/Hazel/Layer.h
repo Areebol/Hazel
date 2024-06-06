@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Core.h"
-#include "Events/Event.h"
+#include "Hazel/Core.h"
+#include "Hazel/Events/Event.h"
 
-namespace Hazel{
+namespace Hazel {
+
 	class HAZEL_API Layer
 	{
 	public:
@@ -13,11 +14,12 @@ namespace Hazel{
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
+		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
 		inline const std::string& GetName() const { return m_DebugName; }
 	protected:
 		std::string m_DebugName;
 	};
-}
 
+}
