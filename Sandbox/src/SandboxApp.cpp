@@ -1,6 +1,8 @@
 #include "hzpch.h"
 #include <Hazel.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Hazel::Layer
 {
 public:
@@ -19,6 +21,13 @@ public:
 	{
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_TAB))
 			HZ_WARN("KEY_TAB(Event)");
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Text");
+		ImGui::Text("Hello World!");
+		ImGui::End();
 	}
 };
 
