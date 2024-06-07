@@ -2,6 +2,7 @@
 #include "Application.h"
 
 #include "Hazel/Log.h"
+#include "Hazel/Events/Event.h"
 
 #include <glad/glad.h>
 

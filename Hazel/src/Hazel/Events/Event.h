@@ -1,5 +1,6 @@
 #pragma once
 
+#include "hzpch.h"
 #include "Hazel/Core.h"
 
 namespace Hazel {
@@ -14,7 +15,7 @@ namespace Hazel {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,KeyTyped,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
@@ -37,6 +38,8 @@ namespace Hazel {
 	class HAZEL_API Event
 	{
 	public:
+		bool Handled = false;
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
@@ -46,8 +49,6 @@ namespace Hazel {
 		{
 			return GetCategoryFlags() & category;
 		}
-	public:
-		bool Handled = false;
 	};
 
 	class EventDispatcher
@@ -78,4 +79,5 @@ namespace Hazel {
 	{
 		return os << e.ToString();
 	}
+
 }
