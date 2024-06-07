@@ -27,6 +27,7 @@ namespace Hazel {
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
