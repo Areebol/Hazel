@@ -6,3 +6,5 @@ bin-int/
 # Files
 *.user
 imgui.ini
+*.sln
+*.vcxproj*
