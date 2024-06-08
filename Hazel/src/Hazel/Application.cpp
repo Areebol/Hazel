@@ -27,13 +27,12 @@ namespace Hazel {
 
 		// 用GL渲染
 		// 0. 顶点数据，索引数据
-		float vertices[4 * 3] = {
+		float vertices[3 * 3] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f,
 		};
-		unsigned int indices[4] = { 0, 1, 2, 3};
+		unsigned int indices[3] = { 0, 1, 2};
 		// 1. 生成顶点数组对象，顶点缓冲对象，索引缓冲对象
 		glGenVertexArrays(1, &m_VertexArray);
 		glGenBuffers(1, &m_VertexBuffer);
@@ -49,6 +48,31 @@ namespace Hazel {
 		// 5. 设定顶点属性指针，来解释顶点缓冲中的顶点属性布局
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		// 6. 创建着色器，顶点设置，颜色设置
+		std::string vertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			out vec3 v_Position;
+			void main()
+			{
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string fragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			in vec3 v_Position;
+			void main()
+			{
+				color = vec4(v_Position * 2, 0.4);
+			}
+		)";
+
+		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
 	}
 
 	Application::~Application()
@@ -87,10 +111,12 @@ namespace Hazel {
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			// 绑定着色器
+			m_Shader->Bind();
 			// 绑定顶点数组对象
 			glBindVertexArray(m_VertexArray);
 			// 绘制元素
-			glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
