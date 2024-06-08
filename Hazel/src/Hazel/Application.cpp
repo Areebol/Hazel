@@ -25,30 +25,28 @@ namespace Hazel {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		// 用GL渲染
-		// 0. 顶点数据，索引数据
+		// Shade 
+		// 0. vertex data
 		float vertices[3 * 3] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
 			 0.0f,  0.5f, 0.0f,
 		};
 		unsigned int indices[3] = { 0, 1, 2};
-		// 1. 生成顶点数组对象，顶点缓冲对象，索引缓冲对象
+		// 1. Gen & Bind VertexArray 
 		glGenVertexArrays(1, &m_VertexArray);
-		glGenBuffers(1, &m_VertexBuffer);
-		glGenBuffers(1, &m_IndexBuffer);
-		// 2. 绑定顶点对象
 		glBindVertexArray(m_VertexArray);
-		// 3. 顶点：CPU缓冲复制到GPU缓冲 供OpenGL使用
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		// 4. 索引：CPU缓冲复制到GPU缓冲 供OpenGL使用
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-		// 5. 设定顶点属性指针，来解释顶点缓冲中的顶点属性布局
+
+		// 2. Gen & Bind Vertex buffer
+		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+
+		// 3. Gen & Bind Vertex buffer
+		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+
+		// 4. Set Attribute
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-		// 6. 创建着色器，顶点设置，颜色设置
+		glVertexAttribPointer(0, m_IndexBuffer->GetCount(), GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		// 5. Create Shader
 		std::string vertexSrc = R"(
 			#version 330 core
 			
@@ -68,7 +66,7 @@ namespace Hazel {
 			in vec3 v_Position;
 			void main()
 			{
-				color = vec4(v_Position * 2, 0.4);
+				color = vec4(v_Position * 0.5 + 0.7, 0.4);
 			}
 		)";
 
@@ -108,14 +106,11 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
-			glClearColor(1, 0, 1, 1);
+			glClearColor(0.1, 0.1, 0.1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			// 绑定着色器
 			m_Shader->Bind();
-			// 绑定顶点数组对象
 			glBindVertexArray(m_VertexArray);
-			// 绘制元素
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
