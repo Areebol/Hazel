@@ -4,10 +4,13 @@
 
 #include "Window.h"
 #include "Hazel/LayerStack.h"
+
 #include "Hazel/Events/Event.h"
+#include "Hazel/Events/ApplicationEvent.h"
+
 #include "Hazel/Renderer/Shader.h"
 #include "Hazel/Renderer/Buffer.h"
-#include "Hazel/Events/ApplicationEvent.h"
+#include "Hazel/Renderer/VertexArray.h"
 
 #include "Hazel/ImGui/ImGuiLayer.h"
 
@@ -31,10 +34,13 @@ namespace Hazel {
 		inline static Application& Get() { return *s_Instance; }
 
 		// Renderer
-		unsigned int m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+		
+		// Renderer
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
