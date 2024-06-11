@@ -33,15 +33,6 @@ namespace Hazel {
 
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
-
-		// Renderer
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-		
-		// Renderer
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-		OrthographicCamera m_Camera;
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
