@@ -5,6 +5,8 @@
 #include "Hazel/Events/Event.h"
 #include "Hazel/Renderer/Renderer.h"
 
+#include "GLFW/glfw3.h"
+
 #include "Input.h"
 
 namespace Hazel {
@@ -56,12 +58,11 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
-			// Set color + Clear
-			RenderCommand::SetClearColor({0.1, 0.1, 0.1, 1});
-			RenderCommand::Clear();
-
+			float time = (float)glfwGetTime();
+			Timestep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
