@@ -2,6 +2,7 @@
 #include <Hazel.h>
 
 #include "imgui/imgui.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 class ExampleLayer : public Hazel::Layer
 {
@@ -37,10 +38,10 @@ public:
 		m_SquareVA.reset(Hazel::VertexArray::Create());
 
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
 
 		std::shared_ptr<Hazel::VertexBuffer> squareVB;
@@ -95,13 +96,13 @@ public:
 			
 			layout(location = 0) in vec3 a_Position;
 			uniform mat4 u_ViewProjection;
-
+			uniform mat4 u_Transform;
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -141,6 +142,19 @@ public:
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_D))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_I)) {
+			m_SquarePosition.y += m_SquareMoveSpeed;
+		}
+		else if (Hazel::Input::IsKeyPressed(HZ_KEY_K)) {
+			m_SquarePosition.y -= m_SquareMoveSpeed;
+		}
+		if (Hazel::Input::IsKeyPressed(HZ_KEY_J)) {
+			m_SquarePosition.x -= m_SquareMoveSpeed;
+		}
+		else if (Hazel::Input::IsKeyPressed(HZ_KEY_L)) {
+			m_SquarePosition.x += m_SquareMoveSpeed;
+		}
+
 		// Set color + Clear
 		Hazel::RenderCommand::SetClearColor({ 0.1, 0.1, 0.1, 1 });
 		Hazel::RenderCommand::Clear();
@@ -150,8 +164,10 @@ public:
 		// Scene begin
 		Hazel::Renderer::BeginScene(m_Camera);
 		// Submita
-		Hazel::Renderer::Submit(m_BlueShader, m_SquareVA);
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+		Hazel::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
 		Hazel::Renderer::Submit(m_Shader, m_VertexArray);
+
 		// Scene end
 		Hazel::Renderer::EndScene();
 	}
@@ -181,6 +197,8 @@ public:
 	float m_CameraMoveSpeed = 5.0f;
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 180.0f;
+	float m_SquareMoveSpeed = 0.01f;
+	glm::vec3 m_SquarePosition = { 0.0f,0.0f,0.0f };
 };
 
 class SandBox : public Hazel::Application
