@@ -62,6 +62,7 @@ public:
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -70,7 +71,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -142,19 +143,6 @@ public:
 		if (Hazel::Input::IsKeyPressed(HZ_KEY_D))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
-		if (Hazel::Input::IsKeyPressed(HZ_KEY_I)) {
-			m_SquarePosition.y += m_SquareMoveSpeed;
-		}
-		else if (Hazel::Input::IsKeyPressed(HZ_KEY_K)) {
-			m_SquarePosition.y -= m_SquareMoveSpeed;
-		}
-		if (Hazel::Input::IsKeyPressed(HZ_KEY_J)) {
-			m_SquarePosition.x -= m_SquareMoveSpeed;
-		}
-		else if (Hazel::Input::IsKeyPressed(HZ_KEY_L)) {
-			m_SquarePosition.x += m_SquareMoveSpeed;
-		}
-
 		// Set color + Clear
 		Hazel::RenderCommand::SetClearColor({ 0.1, 0.1, 0.1, 1 });
 		Hazel::RenderCommand::Clear();
@@ -164,8 +152,7 @@ public:
 		// Scene begin
 		Hazel::Renderer::BeginScene(m_Camera);
 		// Submita
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
-		Hazel::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+		Hazel::Renderer::Submit(m_BlueShader, m_SquareVA);
 		Hazel::Renderer::Submit(m_Shader, m_VertexArray);
 
 		// Scene end
@@ -197,8 +184,6 @@ public:
 	float m_CameraMoveSpeed = 5.0f;
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 180.0f;
-	float m_SquareMoveSpeed = 0.01f;
-	glm::vec3 m_SquarePosition = { 0.0f,0.0f,0.0f };
 };
 
 class SandBox : public Hazel::Application
