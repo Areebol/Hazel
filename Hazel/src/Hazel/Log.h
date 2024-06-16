@@ -9,11 +9,11 @@ namespace Hazel {
 	public:
 		static void Init();// 初始化
 		// 向外提供获取日志对象
-		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		inline static Ref<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		inline static Ref<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 	private:
-		static std::shared_ptr<spdlog::logger> s_CoreLogger;// Hazel项目的日志对象
-		static std::shared_ptr<spdlog::logger> s_ClientLogger;// Sandbox项目的日志对象
+		static Ref<spdlog::logger> s_CoreLogger;// Hazel项目的日志对象
+		static Ref<spdlog::logger> s_ClientLogger;// Sandbox项目的日志对象
 	};
 }
 
