@@ -26,7 +26,7 @@ namespace Hazel {
 		void Run();
 
 		void OnEvent(Event& e);
-
+		bool OnWindowResize(WindowResizeEvent& e);
 		// Layer
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
@@ -43,6 +43,7 @@ namespace Hazel {
 		float m_LastFrameTime;
 	private:
 		static Application* s_Instance;
+		bool m_Minimized = false;
 	};
 
 	// To be defined in CLIENT
