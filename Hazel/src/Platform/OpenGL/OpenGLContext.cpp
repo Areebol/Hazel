@@ -11,6 +11,8 @@ namespace Hazel {
 
 	void OpenGLContext::Init()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		// 由window handle创建context
 		glfwMakeContextCurrent(m_WindowHandle);
 		// 初始化glad库
@@ -26,6 +28,8 @@ namespace Hazel {
 
 	void OpenGLContext::SwapBuffers()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		// 交换window handle的前后缓冲区
 		glfwSwapBuffers(m_WindowHandle);
 	}

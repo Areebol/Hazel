@@ -26,10 +26,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts)
 	HZ_PROFILE_FUNCTION();
 
 	// Update
-	{
-		HZ_PROFILE_SCOPE("m_CameraController.OnUpdate");
-		m_CameraController.OnUpdate(ts);
-	}
+	m_CameraController.OnUpdate(ts);
 
 	{
 		HZ_PROFILE_SCOPE("Hazel::RenderCommand::Prpare");

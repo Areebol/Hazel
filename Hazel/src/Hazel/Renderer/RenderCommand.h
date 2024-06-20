@@ -24,6 +24,8 @@ namespace Hazel {
 
 		inline static void Init()
 		{
+			HZ_PROFILE_FUNCTION();
+
 			s_RendererAPI->Init();
 		}
 
