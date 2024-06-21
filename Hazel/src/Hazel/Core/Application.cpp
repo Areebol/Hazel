@@ -28,6 +28,7 @@ namespace Hazel {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 		Renderer::Init();
+		m_LastFrameTime = (float)glfwGetTime();
 	}
 
 	Application::~Application()
