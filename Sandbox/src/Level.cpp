@@ -3,6 +3,50 @@
 
 using namespace Hazel;
 
+static glm::vec4 HSVtoRGB(const glm::vec3& hsv) {
+	int H = (int)(hsv.x * 360.0f);
+	double S = hsv.y;
+	double V = hsv.z;
+
+	double C = S * V;
+	double X = C * (1 - abs(fmod(H / 60.0, 2) - 1));
+	double m = V - C;
+	double Rs, Gs, Bs;
+
+	if (H >= 0 && H < 60) {
+		Rs = C;
+		Gs = X;
+		Bs = 0;
+	}
+	else if (H >= 60 && H < 120) {
+		Rs = X;
+		Gs = C;
+		Bs = 0;
+	}
+	else if (H >= 120 && H < 180) {
+		Rs = 0;
+		Gs = C;
+		Bs = X;
+	}
+	else if (H >= 180 && H < 240) {
+		Rs = 0;
+		Gs = X;
+		Bs = C;
+	}
+	else if (H >= 240 && H < 300) {
+		Rs = X;
+		Gs = 0;
+		Bs = C;
+	}
+	else {
+		Rs = C;
+		Gs = 0;
+		Bs = X;
+	}
+
+	return { (Rs + m), (Gs + m), (Bs + m), 1.0f };
+}
+
 static bool PointInTri(const glm::vec2& p, glm::vec2& p0, const glm::vec2& p1, const glm::vec2& p2)
 {
 	float s = p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * p.x + (p0.x - p2.x) * p.y;
@@ -30,13 +74,15 @@ void Level::Init()
 
 void Level::OnUpdate(Hazel::Timestep ts)
 {
-	m_Player.OnUpdate(ts);
-
 	if (CollisionTest())
 	{
 		GameOver();
 		return;
 	}
+
+	m_PillarHSV.x += 0.1f * ts;
+	if (m_PillarHSV.x > 1.0f)
+		m_PillarHSV.x = 0.0f;
 
 	if (m_Player.GetPosition().x > m_PillarTarget)
 	{
@@ -44,13 +90,15 @@ void Level::OnUpdate(Hazel::Timestep ts)
 		m_PillarIndex = ++m_PillarIndex % m_Pillars.size();
 		m_PillarTarget += 10.0f;
 	}
+
+	m_Player.OnUpdate(ts);
 }
 
 void Level::OnRender()
 {
-	m_Player.OnRender();
-	const glm::vec4 color = { 0.2f,0.3f,0.8f,1.0f };
+	const glm::vec4 color = HSVtoRGB(m_PillarHSV);
 	const auto& playerPos = m_Player.GetPosition();
+	Renderer2D::DrawQuad({ playerPos.x, 0.0f, -0.8f }, { 50.0f, 50.0f }, { 0.3f, 0.3f, 0.3f, 1.0f });
 	// Floor and ceiling
 	Renderer2D::DrawQuad({ playerPos.x,  34.0f }, { 50.0f, 50.0f }, color);
 	Renderer2D::DrawQuad({ playerPos.x, -34.0f }, { 50.0f, 50.0f }, color);
@@ -60,6 +108,7 @@ void Level::OnRender()
 		Renderer2D::DrawRotatedQuad(pillar.TopPosition, pillar.TopScale, glm::radians(180.0f), m_TriangleTexture,1.0f, color);
 		Renderer2D::DrawRotatedQuad(pillar.BottomPosition, pillar.BottomScale, glm::radians(0.0f), m_TriangleTexture, 1.0f, color);
 	}
+	m_Player.OnRender();
 }
 
 void Level::OnImGuiRender()

@@ -42,7 +42,7 @@ void GameLayer::OnUpdate(Timestep ts)
 	const auto& playerPos = m_Level.GetPlayer().GetPosition();
 	m_Camera->SetPosition({ playerPos.x,playerPos.y,0.0f });
 	// Render
-	Hazel::RenderCommand::SetClearColor({ 0.2f, 0.3f, 0.5f, 1 });
+	Hazel::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1 });
 	Hazel::RenderCommand::Clear();
 	Hazel::Renderer2D::BeginScene(*m_Camera);
 	m_Level.OnRender();

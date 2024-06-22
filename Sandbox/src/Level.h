@@ -39,7 +39,7 @@ private:
 
 	float m_PillarTarget = 30.0f;
 	int m_PillarIndex = 0;
-	glm::vec3 m_PillarHSV = { 0.0f, 0.8f, 0.8f };
+	glm::vec3 m_PillarHSV = { 0.0f, 1.0f, 1.0f };
 
 	std::vector<Pillar> m_Pillars;
 
