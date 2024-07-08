@@ -7,7 +7,7 @@ workspace "Hazel"
 		"Release",
 		"Dist"
 	}
-	startproject "Sandbox"
+	startproject "Hazelnut"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -153,8 +153,8 @@ project "Sandbox"
 		runtime "Release"
 		optimize "on"
 
-project "Hazel-Editor"
-	location "Hazel-Editor"
+project "Hazelnut"
+	location "Hazelnut"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"

@@ -159,7 +159,7 @@ namespace Hazel {
 			ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
 			uint32_t textureID = m_Texture->GetRendererID();
-			ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+			ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f }, ImVec2(0, 1), ImVec2(1, 0));
 			ImGui::End();
 		}
 	}
