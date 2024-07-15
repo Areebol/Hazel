@@ -61,6 +61,10 @@ namespace Hazel {
 
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 	{
+		if (width == 0 || height == 0) {
+			HZ_CORE_WARN("Trying to set framebuffer size to {0} {1}", width, height);
+			return;
+		}
 		m_Specification.Width = width;
 		m_Specification.Height = height;
 
