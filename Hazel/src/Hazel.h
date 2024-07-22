@@ -11,6 +11,7 @@
 #include "Hazel/Core/MouseButtonCodes.h"
 
 #include "Hazel/Scene/Scene.h"
+#include "Hazel/Scene/Entity.h"
 #include "Hazel/Scene/Components.h"
 #include "Hazel/Renderer/Texture.h"
 #include "Hazel/Renderer/Renderer.h"
