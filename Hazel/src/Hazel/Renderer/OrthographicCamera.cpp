@@ -20,7 +20,7 @@ namespace Hazel {
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	void OrthographicCamera::RecaculateMatrix()
+	void OrthographicCamera::RecalculateMatrix()
 	{
 		HZ_PROFILE_FUNCTION();
 

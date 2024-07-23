@@ -91,7 +91,7 @@ namespace Hazel {
 		std::vector<BufferElement> m_Elements;
 		uint32_t m_Stride = 0;
 	private:
-		// Caculate each element's offset + stride in layout
+		// Calculate each element's offset + stride in layout
 		void CalculateOffsetsAndStride()
 		{
 			uint32_t offset = 0;

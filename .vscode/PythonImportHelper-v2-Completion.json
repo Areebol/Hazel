@@ -1,0 +1,56 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "base_path",
+        "kind": 5,
+        "importPath": "Hazel.vendor.spdlog.scripts.extract_version",
+        "description": "Hazel.vendor.spdlog.scripts.extract_version",
+        "peekOfCode": "base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))\nconfig_h = os.path.join(base_path, 'include', 'spdlog', 'version.h')\ndata = {'MAJOR': 0, 'MINOR': 0, 'PATCH': 0}\nreg = re.compile(r'^\\s*#define\\s+SPDLOG_VER_([A-Z]+)\\s+([0-9]+).*$')\nwith open(config_h, 'r') as fp:\n    for l in fp:\n        m = reg.match(l)\n        if m:\n            data[m.group(1)] = int(m.group(2))\nprint(f\"{data['MAJOR']}.{data['MINOR']}.{data['PATCH']}\")",
+        "detail": "Hazel.vendor.spdlog.scripts.extract_version",
+        "documentation": {}
+    },
+    {
+        "label": "config_h",
+        "kind": 5,
+        "importPath": "Hazel.vendor.spdlog.scripts.extract_version",
+        "description": "Hazel.vendor.spdlog.scripts.extract_version",
+        "peekOfCode": "config_h = os.path.join(base_path, 'include', 'spdlog', 'version.h')\ndata = {'MAJOR': 0, 'MINOR': 0, 'PATCH': 0}\nreg = re.compile(r'^\\s*#define\\s+SPDLOG_VER_([A-Z]+)\\s+([0-9]+).*$')\nwith open(config_h, 'r') as fp:\n    for l in fp:\n        m = reg.match(l)\n        if m:\n            data[m.group(1)] = int(m.group(2))\nprint(f\"{data['MAJOR']}.{data['MINOR']}.{data['PATCH']}\")",
+        "detail": "Hazel.vendor.spdlog.scripts.extract_version",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "kind": 5,
+        "importPath": "Hazel.vendor.spdlog.scripts.extract_version",
+        "description": "Hazel.vendor.spdlog.scripts.extract_version",
+        "peekOfCode": "data = {'MAJOR': 0, 'MINOR': 0, 'PATCH': 0}\nreg = re.compile(r'^\\s*#define\\s+SPDLOG_VER_([A-Z]+)\\s+([0-9]+).*$')\nwith open(config_h, 'r') as fp:\n    for l in fp:\n        m = reg.match(l)\n        if m:\n            data[m.group(1)] = int(m.group(2))\nprint(f\"{data['MAJOR']}.{data['MINOR']}.{data['PATCH']}\")",
+        "detail": "Hazel.vendor.spdlog.scripts.extract_version",
+        "documentation": {}
+    },
+    {
+        "label": "reg",
+        "kind": 5,
+        "importPath": "Hazel.vendor.spdlog.scripts.extract_version",
+        "description": "Hazel.vendor.spdlog.scripts.extract_version",
+        "peekOfCode": "reg = re.compile(r'^\\s*#define\\s+SPDLOG_VER_([A-Z]+)\\s+([0-9]+).*$')\nwith open(config_h, 'r') as fp:\n    for l in fp:\n        m = reg.match(l)\n        if m:\n            data[m.group(1)] = int(m.group(2))\nprint(f\"{data['MAJOR']}.{data['MINOR']}.{data['PATCH']}\")",
+        "detail": "Hazel.vendor.spdlog.scripts.extract_version",
+        "documentation": {}
+    }
+]
