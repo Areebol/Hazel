@@ -11,21 +11,21 @@ namespace Hazel {
 	{
 		HZ_PROFILE_FUNCTION();
 
-		if (Input::IsKeyPressed(HZ_KEY_A))
+		if (Input::IsKeyPressed(KeyCode::A))
 			m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
-		else if (Input::IsKeyPressed(HZ_KEY_D))
+		else if (Input::IsKeyPressed(KeyCode::D))
 			m_CameraPosition.x += m_CameraTranslationSpeed * ts;
 
-		if (Input::IsKeyPressed(HZ_KEY_W))
+		if (Input::IsKeyPressed(KeyCode::W))
 			m_CameraPosition.y += m_CameraTranslationSpeed * ts;
-		else if (Input::IsKeyPressed(HZ_KEY_S))
+		else if (Input::IsKeyPressed(KeyCode::S))
 			m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
 
 		if (m_Rotation)
 		{
-			if (Input::IsKeyPressed(HZ_KEY_Q))
+			if (Input::IsKeyPressed(KeyCode::Q))
 				m_CameraRotation += m_CameraRotationSpeed * ts;
-			if (Input::IsKeyPressed(HZ_KEY_E))
+			if (Input::IsKeyPressed(KeyCode::E))
 				m_CameraRotation -= m_CameraRotationSpeed * ts;
 
 			m_Camera.SetRotation(m_CameraRotation);
