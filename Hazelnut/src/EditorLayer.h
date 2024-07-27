@@ -30,7 +30,6 @@ namespace Hazel {
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
 		Ref<Scene> m_ActiveScene;
-		Entity m_SquareEntity;
 		Entity m_CameraEntity;
 		Entity m_SecondCamera;
 
