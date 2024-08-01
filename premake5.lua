@@ -54,7 +54,8 @@ project "Hazel"
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS",
+		"YAML_CPP_STATIC_DEFINE"
 	}
 
 	includedirs
@@ -75,6 +76,7 @@ project "Hazel"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"yaml-cpp",
 		"opengl32.lib"
 	}
 
@@ -131,7 +133,7 @@ project "Sandbox"
 	links
 	{
 		"Hazel",
-		"Glad"
+		"Glad",
 	}
 
 	filter "system:windows"

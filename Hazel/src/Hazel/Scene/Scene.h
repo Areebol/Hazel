@@ -2,6 +2,7 @@
 
 #include "entt.hpp"
 
+#include "Hazel/Core/Core.h"
 #include "Hazel/Core/TimeStep.h"
 
 namespace Hazel
@@ -24,9 +25,10 @@ namespace Hazel
 		void OnComponentAdded(Entity entity,T& component);
 	private:
 		entt::registry m_Registry;
+		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 
 		friend class Entity;
+		friend class SceneSerializer;
 		friend class SceneHierarchyPanel;
-		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 	};
 }
