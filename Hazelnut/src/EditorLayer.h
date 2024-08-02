@@ -36,6 +36,12 @@ namespace Hazel {
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
 		bool m_PrimaryCamera = true;
+	private:
+		bool OnKeyPressed(KeyPressedEvent& e);
+
+		void NewScene();
+		void OpenScene();
+		void SaveSceneAs();
 	};
 
 }
