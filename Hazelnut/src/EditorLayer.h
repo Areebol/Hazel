@@ -2,6 +2,7 @@
 
 #include "Hazel.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Hazel/Renderer/EditorCamera.h"
 
 namespace Hazel {
 
@@ -37,6 +38,7 @@ namespace Hazel {
 
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
+		EditorCamera m_EditorCamera;
 		bool m_PrimaryCamera = true;
 	private:
 		bool OnKeyPressed(KeyPressedEvent& e);
