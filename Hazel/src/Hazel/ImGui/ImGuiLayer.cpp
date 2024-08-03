@@ -1,5 +1,6 @@
 #include "hzpch.h"
 #include "ImGuiLayer.h"
+#include "ImGuizmo.h"
 
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
@@ -87,6 +88,7 @@ namespace Hazel {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
 	}
 
 	void ImGuiLayer::End()
