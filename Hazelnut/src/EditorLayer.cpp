@@ -114,6 +114,8 @@ namespace Hazel {
 			rotation += ts * 50.0f;
 
 			HZ_PROFILE_SCOPE("Renderer Draw");
+			// Clear our entity ID attachment to -1
+			m_Framebuffer->ClearAttachment(1, -1);
 
 			// Update scene
 			m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
