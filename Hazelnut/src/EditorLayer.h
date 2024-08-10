@@ -34,6 +34,7 @@ namespace Hazel {
 		Ref<Scene> m_ActiveScene;
 		Entity m_CameraEntity;
 		Entity m_SecondCamera;
+		Entity m_HoveredEntity;
 
 		int m_GizmoType = -1;
 
